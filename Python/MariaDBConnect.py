@@ -1,3 +1,5 @@
+import os
+
 import mysql.connector
 import configparser
 
@@ -13,7 +15,9 @@ class MariaDBConnect:
         host = config.get('Database', 'host')
         port = config.getint('Database', 'port')
         user = config.get('Database', 'username')
-        password = config.get('Database', 'password')
+        # Prefer the DB_PASSWORD environment variable so the real password
+        # never has to live in connection.ini or in source control.
+        password = os.environ.get('DB_PASSWORD') or config.get('Database', 'password')
         database = config.get('Database', 'database')
 
         # Create a connection to the MariaDB server

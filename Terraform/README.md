@@ -34,6 +34,7 @@ Deploy the code:
 
 ```
 terraform init
+export TF_VAR_db_password='<strong-password>'
 terraform apply
 ```
 

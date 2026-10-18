@@ -1,5 +1,5 @@
--- Allow remote connections to bobdata by Bob
-GRANT ALL PRIVILEGES ON bobdata.* to 'Bob'@'%' IDENTIFIED BY 'pa55word' with grant option;
+-- The remote user 'Bob'@'%' and its bobdata.* privileges are created by
+-- install_mariadb.yaml, with the password supplied at run time (never in this file).
 
 Use bobdata;
 

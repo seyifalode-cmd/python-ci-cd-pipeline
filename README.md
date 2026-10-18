@@ -1,5 +1,7 @@
 # Python CI/CD Pipeline
 
+Oluwaseyi Michael Falode | Cloud & DevOps Engineering | Toronto, ON
+
 A full continuous integration and continuous deployment pipeline for a Python grading application — from linting and unit testing in Jenkins, through artifact packaging, to automated deployment on a remote application server via Ansible.
 
 ---
@@ -110,6 +112,7 @@ The Python application manages a student grading system with four data entities:
 ```bash
 # 1. Provision infrastructure (MariaDB server)
 cd Terraform
+export TF_VAR_db_password='<strong-password>'   # DB user password, kept out of the repo
 terraform init && terraform apply
 
 # 2. Configure Jenkins pipelines
@@ -125,6 +128,10 @@ terraform init && terraform apply
 #   APP_NODE_IP = <your app server IP>
 #   DB_NODE_IP  = <your db server IP>
 # → SCP artifact → Ansible deploy → app starts
+
+# 5. On the app server, give the app the DB password via the environment
+#    (MariaDBConnect.py reads DB_PASSWORD before falling back to connection.ini)
+export DB_PASSWORD='<same value as TF_VAR_db_password>'
 ```
 
 ## What This Demonstrates
